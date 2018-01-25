@@ -145,17 +145,18 @@ public class GoogleMapAPI {
 	class ConfigInfo {
 		public String serverkey = "";
 	}
-	public String getServerKey() {
+	public ConfigInfo getConfig() {
 		String JSON = readConfig();
-		Gson gson = new Gson();		
+		Gson gson = new Gson();
 		ConfigInfo ci = gson.fromJson(JSON, ConfigInfo.class);
 		
-		return ci.serverkey;
+		return ci;
 	}
 	
 	public static void main(String[] args) throws Exception {
 		GoogleMapAPI calDisDur = new GoogleMapAPI();
-		String serverKey = calDisDur.getServerKey();
+		ConfigInfo configInfo = calDisDur.getConfig();
+		String serverKey = configInfo.serverkey;
 		GeoApiContext context = new GeoApiContext().setApiKey(serverKey);
 		/*
 		 * 捷運關渡站
